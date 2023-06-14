@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Comment {
+  id            Int       @id @unique @default(autoincrement())
+  userName      String
+  email         String
+  userId        Int
+  body          String
+  parentId      Int?
+  createdAt     DateTime  @default(now())
+  childrenCount Int?
+  avatarUrl     String
+  Comment       Comment?  @relation("CommentToComment", fields: [parentId], references: [id])
+  other_Comment Comment[] @relation("CommentToComment")
+  User          User      @relation(fields: [userId], references: [id])
+  File          File?
+}
+
+model File {
+  id        Int      @id @unique @default(autoincrement())
+  name      String
+  type      String
+  url       String
+  commentId Int      @unique
+  createdAt DateTime @default(now())
+  size      Int
+  Comment   Comment  @relation(fields: [commentId], references: [id])
+}
+
+model User {
+  id          Int           @id @unique @default(autoincrement())
+  email       String        @unique
+  userName    String        @unique
+  createdAt   DateTime      @default(now())
+  avatarUrl   String
+  password    String
+  homePage    String?
+  Comment     Comment[]
+  UserSession UserSession[]
+}
+
+model UserSession {
+  id        Int      @id @unique @default(autoincrement())
+  userId    Int
+  ip        String
+  userAgent String
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
+}

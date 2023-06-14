@@ -1,0 +1,34 @@
+async function fetchAllComments() {
+  const allComments = await prisma.comment.findMany();
+  return allComments;
+}
+function buildCommentTree(comments) {
+  const commentsById = {};
+  const rootComments = [];
+
+  for (const comment of comments) {
+    commentsById[comment.id] = { ...comment, children: [] };
+  }
+
+  for (const comment of comments) {
+    if (comment.parentId !== null) {
+      commentsById[comment.parentId].children.push(commentsById[comment.id]);
+    } else {
+      rootComments.push(commentsById[comment.id]);
+    }
+  }
+
+  return rootComments;
+}
+
+fetchAllComments()
+  .then((comments) => {
+    const commentTree = buildCommentTree(comments);
+    console.log(JSON.stringify(commentTree, null, 2));
+  })
+  .catch((error) => {
+    console.error(error);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
