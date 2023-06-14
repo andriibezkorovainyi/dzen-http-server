@@ -4,10 +4,14 @@ import { userRouter } from './routes/userRouter';
 import { fileRouter } from './routes/fileRouter';
 import captchaController from './controllers/captchaController';
 import path from 'path';
+import { configDotenv } from 'dotenv';
+
+configDotenv();
 
 function main() {
   const app = express();
   const publicPath = path.join(__dirname, '..', 'public');
+  const PORT = process.env.PORT;
 
   app.use(cors());
   app.use(express.json());
@@ -19,8 +23,8 @@ function main() {
 
   app.post('/verify-token', captchaController.verifyToken);
 
-  app.listen(process.env.PORT, () => {
-    global.console.log(`Server listening on port ${process.env.PORT}`);
+  app.listen(PORT, () => {
+    global.console.log(`Server listening on port ${PORT}`);
   });
 }
 
