@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 class CaptchaController {
   async verifyToken(req: Request, res: Response) {
