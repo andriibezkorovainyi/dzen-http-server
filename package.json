@@ -1,13 +1,12 @@
 {
   "name": "dzen-api",
   "version": "1.0.0",
-  "description": "API for the comments app, using TypeScript, Express, PostgreSQL, Prisma ORM and more...",
-  "main": "src/server.js",
+  "description": "API for the handling static requests",
   "type": "module",
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc",
     "start": "npm run build && node dist/server.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+    "dev": "tsc && nodemon dist/server.js",
     "container": "npm run build && docker build -t dzen-api . && docker run -d --rm -p 3000:3000 dzen-api",
     "format": "prettier --write .",
     "lint": "eslint .",
@@ -16,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andriibezkorovainyi/dzen-api.git"
+    "url": "git+https://github.com/andriibezkorovainyi/dzen-http-server.git"
   },
   "keywords": [],
   "author": "",

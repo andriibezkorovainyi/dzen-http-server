@@ -1,3 +1,3 @@
-# dzen-api
+# dzen-http-server
 
 The RESTful API for the comments app, using TypeScript, Express, PostgreSQL, Prisma ORM and more...
