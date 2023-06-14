@@ -1,0 +1,49 @@
+{
+  "name": "dzen-api",
+  "version": "1.0.0",
+  "description": "API for the comments app, using TypeScript, Express, PostgreSQL, Prisma ORM and more...",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npm run build && node dist/server.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+    "container": "npm run build && docker build -t dzen-api . && docker run -d --rm -p 3000:3000 dzen-api",
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "fix-style": "npm run format && npm run lint -- --fix",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andriibezkorovainyi/dzen-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andriibezkorovainyi/dzen-api/issues"
+  },
+  "homepage": "https://github.com/andriibezkorovainyi/dzen-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "concurrently": "^8.0.1",
+    "eslint": "^8.41.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "nodemon": "^2.0.22",
+    "prettier": "2.8.8",
+    "typescript": "^5.0.4"
+  },
+  "lint-staged": {
+    "*": "npm run lint"
+  }
+}

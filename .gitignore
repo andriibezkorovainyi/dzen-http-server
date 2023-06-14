@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules
+.husky
+
+# Compiled output
+dist/
+
+# Environment variables
+.env
+
+# Editor and IDE files
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*.swo
+
+# Testing
+coverage/
+
+# Build process
+*.tmp
+*.bak
+
+# OS generated files
+Thumbs.db
+.DS_Store
