@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/andriibezkorovainyi/dzen-api#readme",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.353.0",
     "@prisma/client": "^4.15.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
