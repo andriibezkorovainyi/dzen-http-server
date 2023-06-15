@@ -27,7 +27,7 @@ class UserService {
 
   async createUser(data: CreateUserInput) {
     const { userName, email, password, homePage } = data;
-    const safeDate = new Date().toISOString().replace(/:/g, '-');
+    const safeDate = new Date().toISOString().replace(/:/g, '-') + '.svg';
     const avatarUrl = `https://api.multiavatar.com/${safeDate + userName}`;
     const hashedPassword = await bcrypt.hash(password, 10);
 

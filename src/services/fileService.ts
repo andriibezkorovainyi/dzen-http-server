@@ -1,6 +1,10 @@
 import 'path';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { PrismaClient } from '@prisma/client';
+import { CreateFileClientPayload } from '../types/commentTypes';
+
+const prisma = new PrismaClient();
 
 class FileService {
   async getFile(fileName: string) {
@@ -32,14 +36,18 @@ class FileService {
     try {
       const storedFile = await fs.readFile(filePath);
       const base64String = storedFile.toString('base64');
-      const dataURL = `data:${mimeType};base64,${base64String}`;
-
-      console.log(dataURL);
-
-      return dataURL;
+      return `data:${mimeType};base64,${base64String}`;
     } catch (error) {
       console.log(error);
       throw error;
+    }
+  }
+
+  async createFile(filePath: string, binaryData: Buffer) {
+    try {
+      await fs.writeFile(filePath, binaryData);
+    } catch (e) {
+      console.log(e);
     }
   }
 }
