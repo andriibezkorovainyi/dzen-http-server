@@ -31,6 +31,8 @@ class UserController {
     const ip = req.ip;
     const userAgent = req.get('User-Agent') || 'no user agent';
 
+    console.log(ip);
+
     await userSessionService.createUserSession(id, ip, userAgent);
 
     res.json({
