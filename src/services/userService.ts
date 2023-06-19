@@ -27,8 +27,8 @@ class UserService {
 
   async createUser(data: CreateUserInput) {
     const { userName, email, password, homePage } = data;
-    const safeDate = new Date().toISOString().replace(/:/g, '-') + '.svg';
-    const avatarUrl = `https://api.multiavatar.com/${safeDate + userName}`;
+    const safeDate = new Date().toISOString().replace(/:/g, '-');
+    const avatarUrl = `https://api.multiavatar.com/${safeDate + userName}.svg`;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     return prisma.user.create({
